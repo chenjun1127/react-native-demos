@@ -4,21 +4,8 @@
  * Created by jone-chen on 2017/2/22.
  */
 
-import React, {
-    Component
-} from 'react';
-import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TextInput,
-    ScrollView,
-    ListView,
-    Navigator,
-    Animated
-} from 'react-native';
+import React, {Component} from 'react';
+import {AppRegistry,StyleSheet,Text,View,Image,TextInput,ScrollView,ListView,Navigator,Animated} from 'react-native';
 const pic = {
     uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
 };
