@@ -23,7 +23,7 @@ const pic = {
     uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
 };
 // 父组件
-export default class AwesomeProject extends Component {
+export default class FirstProject extends Component {
     render() {
         return (
             <View style={styles.container}>
@@ -383,4 +383,4 @@ const styles = StyleSheet.create({
 });
 
 
-AppRegistry.registerComponent('FirstProject', () => movie);
+AppRegistry.registerComponent('FirstProject', () => FirstProject);
