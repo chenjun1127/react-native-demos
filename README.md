@@ -40,13 +40,11 @@ react-native init FirstProject
 ```javascript
 android avd
 ```
-选择希望运行的模拟器版本，然后点击 Start... 按钮。
-另外，也可以通过命令行来运行模拟器。通过以下命令显示出所有可用的模拟器类型：
+选择希望运行的模拟器版本，然后点击 Start... 按钮。另外，也可以通过命令行来运行模拟器。通过以下命令显示出所有可用的模拟器类型：
 ```javascript
 emulator -list-avds
 ```
-然后通过名字和 @ 前缀来运行它们，例如，我有一个名为 galaxy 的模拟器，我可以这样来
-运行它：
+然后通过名字和 @ 前缀来运行它们，例如，我有一个名为 galaxy 的模拟器，我可以这样来运行它：
 ```javascript
 emulator @galaxy
 ```
