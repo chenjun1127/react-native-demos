@@ -4,8 +4,21 @@
  * Created by jone-chen on 2017/2/22.
  */
 
-import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, Text, View, Image, TextInput, ScrollView, ListView, Navigator,Animated} from 'react-native';
+import React, {
+    Component
+} from 'react';
+import {
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    TextInput,
+    ScrollView,
+    ListView,
+    Navigator,
+    Animated
+} from 'react-native';
 const pic = {
     uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
 };
@@ -111,8 +124,8 @@ class PizzaTranslator extends Component {
 }
 // ScrollView--通用的可滚动的容器,默认为纵向
 import MyScrollView from './js/MyScrollView';
-class myScrollView extends Component{
-    render(){
+class myScrollView extends Component {
+    render() {
         return (
             <MyScrollView/>
         )
@@ -124,11 +137,11 @@ class ListViewBasics extends Component {
         super(props)
         const peoples = ['John', 'Joel', 'James', 'Jimmy', 'Jimmy', 'Jackson', 'Jillian', 'Julie', 'Devin', 'Jack', 'Jone', 'Lucy', 'Eric', 'LiLei', 'Jason', 'Tomas'];
         const ds = new ListView.DataSource({
-            rowHasChanged: function (r1, r2) {
-                return r1 !== r2
-            }
-        })
-        // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+                rowHasChanged: function(r1, r2) {
+                    return r1 !== r2
+                }
+            })
+            // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             dataSource: ds.cloneWithRows(peoples)
         }
@@ -147,34 +160,52 @@ class ListViewBasics extends Component {
 import MyScene from './js/MyScene'
 class SimpleNavigator extends Component {
     render() {
-        return (
-            <Navigator initialRoute={{ title: 'My Initial Scene', index: 0 }} sceneStyle={{backgroundColor:'#f90',padding:0}} renderScene={(route,navigator)=>{
-                return <MyScene title={route.title} onForward={()=>{
-                    const nextIndex = route.index+1;
-                        navigator.push({
-                            title:'Scene '+nextIndex,
-                            index:nextIndex
-                        });
-                    }
+        return ( < Navigator initialRoute = {
+                {
+                    title: 'My Initial Scene',
+                    index: 0
                 }
-                onBack={
-                    ()=>{
-                        if(route.index>0){
-                            navigator.pop();
+            }
+            sceneStyle = {
+                {
+                    backgroundColor: '#f90',
+                    padding: 0
+                }
+            }
+            renderScene = {
+                (route, navigator) => {
+                    return <MyScene title = {
+                        route.title
+                    }
+                    onForward = {
+                        () => {
+                            const nextIndex = route.index + 1;
+                            navigator.push({
+                                title: 'Scene ' + nextIndex,
+                                index: nextIndex
+                            });
                         }
                     }
+                    onBack = {
+                        () => {
+                            if (route.index > 0) {
+                                navigator.pop();
+                            }
+                        }
+                    }
+                    />
                 }
-                />
-            }}/>
+            }
+            />
         )
     }
 }
 // 动画
-class AnimatedBasic extends Component{
-    constructor(props:any){
+class AnimatedBasic extends Component {
+    constructor(props: any) {
         super(props)
-        this.state={
-            bounceValue:new Animated.Value(0)
+        this.state = {
+            bounceValue: new Animated.Value(0)
         }
     }
 
@@ -190,23 +221,26 @@ class AnimatedBasic extends Component{
 
         )
     }
-    componentDidMount(){
+    componentDidMount() {
         this.state.bounceValue.setValue(1.5);
-        Animated.spring(this.state.bounceValue,{toValue:1,friction:1}).start();
+        Animated.spring(this.state.bounceValue, {
+            toValue: 1,
+            friction: 1
+        }).start();
     }
 
 }
 import MyAnimatedBasic from './js/MyAnimatedBasic'
-class myAnimatedBasic extends Component{
-    render(){
+class myAnimatedBasic extends Component {
+    render() {
         return (
             <MyAnimatedBasic/>
         )
     }
 }
 import MyAnimatedComplex from './js/MyAnimatedComplex'
-class myAnimatedComplex extends Component{
-    render(){
+class myAnimatedComplex extends Component {
+    render() {
         return (
             <MyAnimatedComplex/>
         )
@@ -214,8 +248,8 @@ class myAnimatedComplex extends Component{
 }
 // 组合动画
 import MyAnimatedParallel from './js/MyAnimatedParallel'
-class myAnimatedParallel extends Component{
-    render(){
+class myAnimatedParallel extends Component {
+    render() {
         return (
             <MyAnimatedParallel/>
         )
@@ -223,8 +257,8 @@ class myAnimatedParallel extends Component{
 }
 //电影列表
 import Movie from './js/Movie'
-class movie extends Component{
-    render(){
+class movie extends Component {
+    render() {
         return (
             <Movie/>
         )
@@ -232,8 +266,8 @@ class movie extends Component{
 }
 // 按钮组件
 import MyButton from './js/MyButton'
-class button extends Component{
-    render(){
+class button extends Component {
+    render() {
         return (
             <MyButton/>
         )
@@ -241,8 +275,8 @@ class button extends Component{
 }
 // 日历组件
 import DatePickerForAndroid from './js/DatePickerForAndroid'
-class datePickerForAndroid extends Component{
-    render(){
+class datePickerForAndroid extends Component {
+    render() {
         return (
             <DatePickerForAndroid/>
         )
@@ -250,8 +284,8 @@ class datePickerForAndroid extends Component{
 }
 // KeyboardAvoidingView组件
 import KeyboardAvoidingView from './js/KeyboardAvoidingView'
-class keyboardAvoidingView extends Component{
-    render(){
+class keyboardAvoidingView extends Component {
+    render() {
         return (
             <KeyboardAvoidingView/>
         )
@@ -259,8 +293,8 @@ class keyboardAvoidingView extends Component{
 }
 // MyModal组件
 import MyModal from './js/MyModal'
-class myModal extends Component{
-    render(){
+class myModal extends Component {
+    render() {
         return (
             <MyModal/>
         )
@@ -269,8 +303,8 @@ class myModal extends Component{
 
 // SimpleViewNavigator
 import SimpleViewNavigator_1 from './js/SimpleViewNavigator_1'
-class simpleViewNavigator_1 extends Component{
-    render(){
+class simpleViewNavigator_1 extends Component {
+    render() {
         return (
             <SimpleViewNavigator_1/>
         )
@@ -278,18 +312,18 @@ class simpleViewNavigator_1 extends Component{
 }
 // SimpleViewNavigator
 import SimpleViewNavigator_2 from './js/SimpleViewNavigator_2'
-class simpleViewNavigator_2 extends Component{
-    render(){
+class simpleViewNavigator_2 extends Component {
+    render() {
         return (
             <SimpleViewNavigator_2/>
         )
     }
 }
 // 自定义SimpleViewNavigator
-const  backIcon = require('./img/arrow_left.png')
+const backIcon = require('./img/arrow_left.png')
 import NavigationBar from './common/NavBarCommon'
-class navigationBar extends Component{
-    render(){
+class navigationBar extends Component {
+    render() {
         return (
             <NavigationBar title={'首页'} leftImage={ backIcon }  rightTitle="设置" leftAction={()=>{alert('a')}} rightAction={()=>{alert(this)}}/>
         )
@@ -297,32 +331,31 @@ class navigationBar extends Component{
 }
 // RefreshControl
 import RefreshControlExample from './js/MyRefreshControl';
-class myRefreshControl extends Component{
-    render(){
-        return(
+class myRefreshControl extends Component {
+    render() {
+        return (
             <RefreshControlExample/>
         )
     }
 }
 // Slider
 import SimpleSlider from './js/SimpleSlider';
-class simpleSlider extends Component{
-    render(){
-        return(
+class simpleSlider extends Component {
+    render() {
+        return (
             <SimpleSlider/>
         )
     }
 }
-// Slider
+// WebView
 import SimpleWebView from './js/SimpleWebView';
-class simpleWebView extends Component{
-    render(){
-        return(
+class simpleWebView extends Component {
+    render() {
+        return (
             <SimpleWebView/>
         )
     }
 }
-
 
 
 
@@ -343,11 +376,11 @@ const styles = StyleSheet.create({
         color: '#333333',
         marginBottom: 5,
     },
-    listView:{
-        marginHorizontal:10,
-        paddingVertical:10,
+    listView: {
+        marginHorizontal: 10,
+        paddingVertical: 10,
     }
 });
 
 
-AppRegistry.registerComponent('FirstProject', () => simpleWebView);
+AppRegistry.registerComponent('FirstProject', () => movie);
