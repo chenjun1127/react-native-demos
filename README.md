@@ -19,6 +19,14 @@ Android 依赖的安装需要较多的步骤，应查看[官方文档](https://f
 然后，点击 Install Packages 并接受合适的许可。等待安装完成可能会花费一些时间。
 
 4、安装模拟器和相关的工具
-再次运行 android 来启动 Android SDK 管理器。我们将安装一些其他的包。
+再次运行 android 来启动 Android SDK 管理器。将安装一些其他的包。
 * Intel x86 Atom System Image (for Android 5.1.1–API 22)
 * Intel x86 Emulator Accelerator (HAXM installer)
+
+再次点击 Install Packages，接受合适的许可。
+
+这些依赖包使我们能够创建 Android 虚拟设备（Android Virtual Devices，AVDs）或模拟器，命令行执行下面命令：
+```javascript
+android avd
+```
+创建任何你喜欢的模拟器（此处创建了一个 Galaxy Nexus 模拟器）,确保已经勾选了 Use Host GPU，否则模拟器会非常慢
