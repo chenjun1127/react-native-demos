@@ -16,6 +16,7 @@ Android 依赖的安装需要较多的步骤，应查看[官方文档](https://f
 * Android SDK Build-tools version 23.0.1
 * Android 6.0 (API 23)
 * Android Support Repository
+
 然后，点击 Install Packages 并接受合适的许可。等待安装完成可能会花费一些时间。
 
 4、安装模拟器和相关的工具
