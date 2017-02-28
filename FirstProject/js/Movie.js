@@ -8,7 +8,7 @@
  */
 
 import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, Text, View, ListView, Image,ActivityIndicator} from 'react-native';
+import {StyleSheet, Text, View, ListView, Image,ActivityIndicator} from 'react-native';
 const REQUEST_URL = 'https://api.douban.com/v2/movie/in_theaters';
 export default class movie extends Component {
     constructor(props) {

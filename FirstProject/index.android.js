@@ -111,13 +111,7 @@ class PizzaTranslator extends Component {
 }
 // ScrollView--通用的可滚动的容器,默认为纵向
 import MyScrollView from './js/MyScrollView';
-class myScrollView extends Component {
-    render() {
-        return (
-            <MyScrollView/>
-        )
-    }
-}
+
 // ListView --垂直的滚动列表
 class ListViewBasics extends Component {
     constructor(props) {
@@ -218,94 +212,25 @@ class AnimatedBasic extends Component {
 
 }
 import MyAnimatedBasic from './js/MyAnimatedBasic'
-class myAnimatedBasic extends Component {
-    render() {
-        return (
-            <MyAnimatedBasic/>
-        )
-    }
-}
 import MyAnimatedComplex from './js/MyAnimatedComplex'
-class myAnimatedComplex extends Component {
-    render() {
-        return (
-            <MyAnimatedComplex/>
-        )
-    }
-}
 // 组合动画
 import MyAnimatedParallel from './js/MyAnimatedParallel'
-class myAnimatedParallel extends Component {
-    render() {
-        return (
-            <MyAnimatedParallel/>
-        )
-    }
-}
+
 //电影列表
 import Movie from './js/Movie'
-class movie extends Component {
-    render() {
-        return (
-            <Movie/>
-        )
-    }
-}
 // 按钮组件
 import MyButton from './js/MyButton'
-class button extends Component {
-    render() {
-        return (
-            <MyButton/>
-        )
-    }
-}
 // 日历组件
 import DatePickerForAndroid from './js/DatePickerForAndroid'
-class datePickerForAndroid extends Component {
-    render() {
-        return (
-            <DatePickerForAndroid/>
-        )
-    }
-}
 // KeyboardAvoidingView组件
 import KeyboardAvoidingView from './js/KeyboardAvoidingView'
-class keyboardAvoidingView extends Component {
-    render() {
-        return (
-            <KeyboardAvoidingView/>
-        )
-    }
-}
 // MyModal组件
 import MyModal from './js/MyModal'
-class myModal extends Component {
-    render() {
-        return (
-            <MyModal/>
-        )
-    }
-}
-
 // SimpleViewNavigator
 import SimpleViewNavigator_1 from './js/SimpleViewNavigator_1'
-class simpleViewNavigator_1 extends Component {
-    render() {
-        return (
-            <SimpleViewNavigator_1/>
-        )
-    }
-}
 // SimpleViewNavigator
 import SimpleViewNavigator_2 from './js/SimpleViewNavigator_2'
-class simpleViewNavigator_2 extends Component {
-    render() {
-        return (
-            <SimpleViewNavigator_2/>
-        )
-    }
-}
+
 // 自定义SimpleViewNavigator
 const backIcon = require('./img/arrow_left.png')
 import NavigationBar from './common/NavBarCommon'
@@ -318,33 +243,12 @@ class navigationBar extends Component {
 }
 // RefreshControl
 import RefreshControlExample from './js/MyRefreshControl';
-class myRefreshControl extends Component {
-    render() {
-        return (
-            <RefreshControlExample/>
-        )
-    }
-}
 // Slider
 import SimpleSlider from './js/SimpleSlider';
-class simpleSlider extends Component {
-    render() {
-        return (
-            <SimpleSlider/>
-        )
-    }
-}
 // WebView
 import SimpleWebView from './js/SimpleWebView';
-class simpleWebView extends Component {
-    render() {
-        return (
-            <SimpleWebView/>
-        )
-    }
-}
-
-
+// 手势响应系统、 PanResponde
+import PanResponderExample from './js/PanDemo';
 
 const styles = StyleSheet.create({
     container: {
@@ -370,4 +274,4 @@ const styles = StyleSheet.create({
 });
 
 
-AppRegistry.registerComponent('FirstProject', () => FirstProject);
+AppRegistry.registerComponent('FirstProject', () => MyScrollView);
