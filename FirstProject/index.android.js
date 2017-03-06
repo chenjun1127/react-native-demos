@@ -274,4 +274,4 @@ const styles = StyleSheet.create({
 });
 
 
-AppRegistry.registerComponent('FirstProject', () => MyScrollView);
+AppRegistry.registerComponent('FirstProject', () => Movie);
