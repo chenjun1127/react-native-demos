@@ -7,8 +7,17 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {StyleSheet, Text, View, ListView, Image,ActivityIndicator} from 'react-native';
+import React, {
+    Component
+} from 'react';
+import {
+    StyleSheet,
+    Text,
+    View,
+    ListView,
+    Image,
+    ActivityIndicator
+} from 'react-native';
 const REQUEST_URL = 'https://api.douban.com/v2/movie/in_theaters';
 export default class movie extends Component {
     constructor(props) {
@@ -56,7 +65,7 @@ export default class movie extends Component {
     renderMovie(movie) {
         var authors;
         if (movie.casts.length) {
-            var Authors = movie.casts.map(function (index, elem) {
+            var Authors = movie.casts.map(function(index, elem) {
                 return <Greeting key={elem} name={index.name}/>
             })
             authors = (
@@ -122,5 +131,3 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 });
-
-
