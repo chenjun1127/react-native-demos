@@ -12,5 +12,6 @@
 * [react-native-autocomplete-input](https://github.com/l-urence/react-native-autocomplete-input)，react-native 表单自动完成组件。
 * [react-native-lightbox](https://github.com/oblador/react-native-lightbox)，react-native 图片lightbox效果。
 * [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)，react-native 完美的 icon 图标组件库。
+* [react-native-communications](https://github.com/anarchicknight/react-native-communications)，react-native 调用手机通讯功能。
 
 
