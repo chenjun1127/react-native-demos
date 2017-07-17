@@ -11,8 +11,8 @@ export default class extends Component{
         super(props);
 
         this.state = {
-            tabNames: ['音乐', '天气', '电影', '服务'],
-            tabIconNames: ['ios-musical-notes', 'ios-partly-sunny-outline', 'ios-film', 'ios-list-box-outline'],
+            tabNames: ['音乐', '天气', '书籍'],
+            tabIconNames: ['ios-musical-notes', 'ios-partly-sunny-outline', 'ios-book'],
             activeColor:'#3c9',
             initColor:'#adadad',
         };
