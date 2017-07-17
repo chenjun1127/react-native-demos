@@ -13,5 +13,7 @@
 * [react-native-lightbox](https://github.com/oblador/react-native-lightbox)，react-native 图片lightbox效果。
 * [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)，react-native 完美的 icon 图标组件库。
 * [react-native-communications](https://github.com/anarchicknight/react-native-communications)，react-native 调用手机通讯功能。
+* [react-native-tab-navigator](https://github.com/expo/react-native-tab-navigator)，react-native 切换标签栏，兼容ios、android。
+* [react-native-elements](https://react-native-training.github.io/react-native-elements/)，react-native 公共组件库。
 
 
