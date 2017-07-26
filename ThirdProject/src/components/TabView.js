@@ -11,8 +11,8 @@ export default class extends Component{
         super(props);
 
         this.state = {
-            tabNames: ['音乐', '天气', '书籍'],
-            tabIconNames: ['ios-musical-notes', 'ios-partly-sunny-outline', 'ios-book'],
+            tabNames: ['音乐', '天气', '书籍','新闻'],
+            tabIconNames: ['ios-musical-notes', 'ios-partly-sunny', 'ios-film','ios-list-box'],
             activeColor:'#3c9',
             initColor:'#adadad',
         };
@@ -24,7 +24,8 @@ export default class extends Component{
             <ScrollableTabView locked={true} renderTabBar={() => <TabBar tabNames={this.state.tabNames} tabIconNames={this.state.tabIconNames} initColor={this.state.initColor} activeColor={this.state.activeColor}/>} tabBarPosition={"overlayBottom"} >
                 <MusicPage tabLabel="tab1" navigator={this.props.navigator} />
                 <WeatherPage tabLabel="tab2" navigator={this.props.navigator}  />
-                <BooksPage tabLabel="tab3" />
+                <MoviePage tabLabel="tab3" />
+                <NewsPage tabLabel="tab4" navigator={this.props.navigator} />
             </ScrollableTabView>
         )
     }
@@ -34,7 +35,8 @@ export default class extends Component{
 
 import MusicPage from './MusicPage';
 import WeatherPage from  './WeatherPage';
-import BooksPage from  './BooksPage';
+import MoviePage from  './MoviePage';
+import NewsPage from  './NewsPage';
 
 const styles= StyleSheet.create({
     tabContanier:{

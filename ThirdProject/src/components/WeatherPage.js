@@ -1,230 +1,290 @@
 /**
  * Created by 0easy-23 on 2017/3/28.
  */
-
-import React, {
-    Component
-} from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    TextInput,
-    ScrollView,
-    Image,
-    Animated,
-    Easing
-} from 'react-native';
-
-
+import React, {Component} from 'react';
+import {View, Text, StyleSheet, ScrollView, Image, Dimensions,RefreshControl} from 'react-native';
+const {width, height} = Dimensions.get("window");
+import Toast from 'react-native-toast'
+import LoadingView from '../common/LoadingView';
+import moment from 'moment';
+import zhcn from 'moment/locale/zh-cn';
+moment.locale('zh-cn', zhcn);
+// console.log(moment.locale())
+// console.log(moment('2010-10-20'))
 export default class  extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            zip: '',
+            city: '',
             loaded: false,
-            weatherData: null,
-            weatherDesc: null
+            position: 'unknown',
+            lastPosition: 'unknown',
+            havaData: false,
+            isRefreshing:false,
         }
-        this.onSubmitEditing = this.onSubmitEditing.bind(this);
+        this.onChangeText = this.onChangeText.bind(this);
+        this.request = this.request.bind(this);
+        this.getData = this.getData.bind(this);
+        this.getGeolocation = this.getGeolocation.bind(this);
+        this._onRefresh = this._onRefresh.bind(this);
     }
 
-    render() {
-        if (this.state.weatherData !== null) {
-            var weatherInfoDetail = this.state.weatherData.map((ele, index) => {
-                if (index == 0) {
-                    return <TextInfoFirst key={index} date={ele.date} temp={ele.temperature} weather={ele.weather} wind={ele.wind}/>
+    componentDidMount() {
+        this.getGeolocation();
+
+    }
+
+    getGeolocation() {
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.setState({position, loaded: true,isRefreshing: false});
+            if (this.state.loaded) {
+                this.getData();
+            }
+        }, (error) => {
+            Toast.showShortCenter("获取位置失败，请重试");
+            this.setState({isRefreshing: false})
+        }, {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000});
+        this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
+            this.setState({position: lastPosition,isRefreshing: false});
+        });
+    }
+
+    request(url) {
+        return fetch(url).then((res) => res.json()).catch((error) => ({error}));
+    }
+
+
+    getData() {
+        let BAIDU_URL = 'http://api.map.baidu.com/geocoder/v2/?output=json&location=';
+        let BAIDU_AK = "00696cfe878e5d8d5b737a2a9713d8f8";
+        let QQ_KEY = 'LJZBZ-2CQK6-4ILSS-MGBUZ-QGQB7-WCB5J';
+        let QQ_URL = 'http://apis.map.qq.com/ws/geocoder/v1/?location=';
+        let latitude = this.state.position.coords.latitude;
+        let longitude = this.state.position.coords.longitude;
+        let apiURL = BAIDU_URL + latitude + "," + longitude + "&ak=" + BAIDU_AK;
+        this.request(apiURL).then((resData) => {
+            console.log(resData)
+            this.setState({city: resData.result.addressComponent});
+            let url = `https://way.jd.com/jisuapi/weather?city=${this.state.city.city}&appkey=ac130be3592a68fa7266569081c0c75e`;
+            this.request(url).then((resData) => {
+                console.log("weatherData:", resData);
+                if ((resData.code == 10000) && resData.result.msg == 'ok') {
+                    this.setState({
+                        WeatherData: resData.result.result,
+                        havaData: true,
+                    })
                 } else {
-                    return <TextInfo key={index} picDay={ele.dayPictureUrl} picNight={ele.nightPictureUrl} date={ele.date} temp={ele.temperature} weather={ele.weather}
-                                     wind={ele.wind}/>
+                    Toast.showShortCenter("获取数据失败，请重试");
                 }
             })
-        }
-        if (this.state.weatherDesc !== null) {
-            var weatherInfoDesc = this.state.weatherDesc.map((ele, index) => {
-                return <TextDesc key={index} title={ele.title} zs={ele.zs} tipt={ele.tipt} des={ele.des}/>
-            })
-        }
-        return (
-            <View style={styles.container}>
-
-                <TextInput onChangeText={(text) => this.setState({zip: text, weatherData: null, weatherDesc: null})} onSubmitEditing={this.onSubmitEditing} style={styles.input}
-                           placeholder="请输入城市名称" maxLength={10}/>
-                <View>
-                    <Text style={styles.welcome}>
-                        当前城市： {this.state.zip}
-                    </Text>
-                    {!this.state.loaded
-                        ? null
-                        : <LoadingView/>}
-
-                    <ScrollView horizontal={true} style={styles.scrollView}>
-                        {weatherInfoDetail}
-                    </ScrollView>
-                    <ScrollView >
-                        {weatherInfoDesc}
-                    </ScrollView>
-                </View>
-
-            </View>
-        )
-
-    }
-
-    onSubmitEditing(event) {
-        //console.log(event.nativeEvent.text);
-        var zip = event.nativeEvent.text
-        this.setState({
-            zip: zip,
-            loaded: true
-        });
-        let url = `http://api.map.baidu.com/telematics/v3/weather?location=${zip}&output=json&ak=00696cfe878e5d8d5b737a2a9713d8f8`
-        let URL1 = `http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid=${zip}`
-
-        fetch(url).then((res) => res.json()).then((resJson) => {
-            //console.log(resJson)
-            var description = resJson.results[0].index;
-            var weatherInfo = resJson.results[0].weather_data;
-            this.setState({
-                weatherData: weatherInfo,
-                weatherDesc: description,
-                loaded: false
-            })
-        }).catch((error) => {
-            console.warn(error);
         })
 
     }
+
+    componentWillUnmount() {
+        navigator.geolocation.clearWatch(this.watchID);
+    }
+
+    onChangeText(text) {
+        this.setState({city: text})
+    }
+    _onRefresh(){
+        this.setState({isRefreshing: true});
+        setTimeout(()=>{
+            this.getGeolocation();
+            console.log('下拉刷新了')
+            // this.setState({isRefreshing: false});
+        },1000);
+    }
+    render() {
+        if (this.state.havaData) {
+            let dailyList = this.state.WeatherData.daily;
+            let indexList = this.state.WeatherData.index;
+            for (var i = 0; i < dailyList.length; i++) {
+                dailyList[i].index = indexList[i];
+            }
+            const daily = dailyList.map((ele, i) => {
+                return (
+                    <View key={i} style={ i == 0 ? styles.viewListFirst : styles.viewList}>
+                        <View style={styles.leftWidth}>
+                            <Text style={styles.color}>{ele.week} </Text>
+                            <Image source={{uri: `http://otc043t55.bkt.clouddn.com/${ele.day.img}.png`}} resizeMode="contain" style={styles.weatherIcon}/>
+                            <Text style={styles.color}>{ele.night.templow} - <Text style={styles.color}>{ele.day.temphigh}</Text>℃</Text>
+                            <Text style={styles.color}>{ele.day.weather}</Text>
+                            <Text style={styles.color}>{ele.day.winddirect}<Text style={styles.color}>{ele.day.windpower}</Text></Text>
+                        </View>
+                        <View style={styles.rightWidth}>
+                            <Text style={[styles.color, {paddingBottom: 10}]}>相关指数：</Text>
+                            <Text style={styles.color}>{ele.index.detail}</Text>
+                            <Text style={styles.color}>{ele.index.iname}：<Text style={styles.color}>{ele.index.ivalue || ele.index.index}</Text></Text>
+                            <Text style={[styles.color, {paddingTop: 10}]}>{moment(ele.date).format('MM月DD日')}</Text>
+                        </View>
+                    </View>
+                )
+            })
+
+            return (
+                <Image style={styles.bgImg} source={{uri: 'http://tianqitong.sina.cn/img/bg1.jpg'}}>
+                    <ScrollView style={styles.container} refreshControl={<RefreshControl
+                        refreshing={this.state.isRefreshing}
+                        onRefresh={this._onRefresh}
+                        tintColor="#ff0000"
+                        title="Loading..."
+                        titleColor="#00ff00"
+                        colors={['#fff']}
+                        progressBackgroundColor="#3c9"
+                    />}>
+                        <View style={styles.titleList}>
+                            <Text style={styles.title}>{this.state.city.city}</Text>
+                            <Text style={styles.color}>{this.state.WeatherData.week}  </Text>
+                            <Text style={styles.color}>{this.state.WeatherData.date}</Text>
+                            <View style={styles.updateTime}>
+                                <Text style={[styles.color, {textAlign: 'right'}]}>最后更新</Text>
+                                <Text style={[styles.color, {textAlign: 'right'}]}>{moment(this.state.WeatherData.updatetime).fromNow()}</Text>
+                            </View>
+                            <View style={styles.quality}>
+                                <Text style={[styles.color, {textAlign: 'right'}]}>空气质量</Text>
+                                <Text style={[styles.color, {textAlign: 'left'}]}>{this.state.WeatherData.aqi.aqi}{this.state.WeatherData.aqi.quality}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.bigTemp}>
+                            <Text style={styles.mainTemp}>{this.state.WeatherData.temp}</Text>
+                            <Text style={styles.tempDeg}></Text>
+                            <Text style={styles.weatherText}>{this.state.WeatherData.weather}</Text>
+                        </View>
+                        <Text style={styles.publicTitle}>未来7天天气预报</Text>
+                        <ScrollView horizontal={false} style={styles.scrollView}>
+                            {daily}
+                        </ScrollView>
+                    </ScrollView>
+                </Image>
+            )
+        } else {
+            return (
+                <LoadingView loadingText="正在获取位置，加载数据中..."/>
+            )
+        }
+    }
 }
 
-class TextInfo extends Component {
-    render() {
-        return (
-            <View style={styles.TextInfo}>
-                <Text style={styles.text}>
-                    {this.props.date}
-                </Text>
-                <Text style={styles.text}>
-                    {this.props.temp}
-                </Text>
-                <View style={styles.imgView}>
-                    <Image source={{
-                        uri: this.props.picDay
-                    }} style={styles.imgTb}/>
-                </View>
-                <View style={styles.imgView}>
-                    <Image source={{
-                        uri: this.props.picNight
-                    }} style={styles.imgTb}/>
-                </View>
-                <Text style={styles.text}>
-                    {this.props.weather}
-                </Text>
-                <Text style={styles.text}>
-                    {this.props.wind}
-                </Text>
-            </View>
-        )
-    }
-}
-
-class TextInfoFirst extends Component {
-    render() {
-        return (
-            <View style={styles.TextInfo}>
-                <Text style={styles.text}>
-                    {this.props.date}
-                </Text>
-                <Text style={styles.text}>
-                    {this.props.temp}
-                </Text>
-                <Text style={styles.text}>
-                    {this.props.weather}
-                </Text>
-                <Text style={styles.text}>
-                    {this.props.wind}
-                </Text>
-            </View>
-        )
-    }
-}
-class TextDesc extends Component {
-    render() {
-        return (
-            <View style={styles.textDesc}>
-                <View style={styles.textDescView}>
-                    <Text style={styles.textlistLeft}>
-                        {this.props.title}
-                    </Text>
-                    <Text style={styles.textlistRight}>
-                        {this.props.zs}
-                    </Text>
-                </View>
-                <View style={styles.textDescView}>
-                    <Text style={styles.textlistLeft}>
-                        {this.props.tipt}
-                    </Text>
-                    <Text style={styles.textlistRight}>
-                        {this.props.des}
-                    </Text>
-                </View>
-            </View>
-        )
-    }
-}
-import LoadingView from '../common/LoadingView';
 
 const styles = StyleSheet.create({
+    bgImg: {
+        flex: 1,
+    },
+    title: {
+        color: '#fff',
+        fontSize: 24,
+        textAlign: 'center',
+        paddingVertical: 10,
+        paddingBottom: 0,
+    },
+    updateTime: {
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        padding: 10,
+        paddingTop: 15,
+    },
+    quality: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        padding: 10,
+        paddingTop: 15,
+    },
+    titleList: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative'
+    },
+    titleTime: {
+        flexDirection: 'row',
+        paddingHorizontal: 10,
+    },
+    leftWidth: {
+        width: width / 3,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRightWidth: StyleSheet.hairlineWidth,
+        borderColor: '#f3f3f3',
+        paddingVertical: 10,
+    },
+    rightWidth: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingLeft: 20,
+    },
     container: {
         flex: 1,
-        padding: 10
+        backgroundColor: 'rgba(0,0,0,.3)'
     },
-    scrollView: {
-        height: 190
+    indexTitle: {
+        textAlign: 'center',
+        flexDirection: 'row',
+        justifyContent: 'center',
     },
-    input: {
-        borderWidth: StyleSheet.hairlineWidth,
-        height: 40
-    },
-    welcome: {
-        paddingVertical: 8,
+    publicTitle: {
+        color: '#fff',
+        padding: 10,
+        fontSize: 16,
         textAlign: 'center'
     },
-    TextInfo: {
-        width: 100,
-        borderLeftWidth: StyleSheet.hairlineWidth,
-        borderLeftColor: '#666'
-    },
-    text: {
-        lineHeight: 22,
-        textAlign: 'center'
-    },
-    textDescView: {
-        paddingVertical: 10,
+    viewList: {
         flexDirection: 'row',
         borderBottomWidth: StyleSheet.hairlineWidth,
-        alignItems: 'center'
-    },
-    textlist: {
-        backgroundColor: 'gray',
+        borderColor: '#f0f0f0',
+        paddingHorizontal: 0,
         paddingVertical: 10,
-        flex: 1
     },
-    textlistLeft: {
-        flex: 1
+    bigTemp: {
+        flexDirection: 'row',
+        position: 'relative',
+        justifyContent: 'center',
     },
-    textlistRight: {
-        flex: 3,
-        lineHeight: 22
+    weatherIcon: {
+        width: 50,
+        height: 50,
+        marginVertical: 10,
     },
-    imgTb: {
-        width: 42,
-        height: 30,
-        borderRadius: 10,
-        marginVertical: 3
+    color: {
+        color: '#fff',
     },
-    imgView: {
-        alignItems: 'center',
-        justifyContent: 'center'
+    mainTemp: {
+        fontSize: 100,
+        color: '#fff',
+    },
+    viewListFirst: {
+        flexDirection: 'row',
+        borderTopWidth: StyleSheet.hairlineWidth,
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderColor: '#f0f0f0',
+        paddingHorizontal: 0,
+        paddingVertical: 10,
+    },
+    update: {
+        color: '#fff',
+    },
+    indexList: {
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderColor: '#fff',
+        padding: 10,
+    },
+    scrollView: {
+        backgroundColor: 'rgba(0,0,0,.3)'
+    },
+    tempDeg: {
+        borderRadius: 7,
+        width: 14,
+        height: 14,
+        borderColor: '#fff',
+        borderWidth: 2,
+        marginTop: 36,
+        paddingLeft: 7
+    },
+    weatherText: {
+        color: '#fff',
+        marginTop: 73,
+        fontSize: 26
     }
 })
