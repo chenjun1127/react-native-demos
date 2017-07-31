@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, ScrollView, Image, Dimensions,RefreshControl} from 'react-native';
 const {width, height} = Dimensions.get("window");
 import Toast from 'react-native-toast'
-import LoadingView from '../common/LoadingView';
+import LoadingView from '../../common/LoadingView';
 import moment from 'moment';
 import zhcn from 'moment/locale/zh-cn';
 moment.locale('zh-cn', zhcn);

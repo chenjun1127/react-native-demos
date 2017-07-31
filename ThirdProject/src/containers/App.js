@@ -2,12 +2,12 @@
  * Created by 0easy-23 on 2017/3/17.
  */
 import React, {Component} from 'react';
-import { Navigator} from 'react-native';
+import {Navigator} from 'react-native';
 
 export default class extends Component {
     render() {
         return (
-            <Navigator initialRoute={{name: 'start page', index: 0,component:TabView}} renderScene={this.renderScene} configureScene={this.configureScene}/>
+            <Navigator initialRoute={{name: 'start page', index: 0, component: TabView}} renderScene={this.renderScene} configureScene={this.configureScene}/>
         )
     }
 
@@ -25,9 +25,6 @@ export default class extends Component {
         return <route.component navigator={navigator} {...route.passProps} />
     }
 }
-
-
-
 
 import TabView from './TabView';
 

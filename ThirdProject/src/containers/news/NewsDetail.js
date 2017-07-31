@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {View, Text, ScrollView, StyleSheet, Image, Dimensions} from 'react-native';
-import NavigatorHeader from '../common/NavigatorHeader';
+import NavigatorHeader from '../../common/NavigatorHeader';
 import HTMLView  from 'react-native-html2native';
 const {width, height} = Dimensions.get('window');
 export default class extends Component {

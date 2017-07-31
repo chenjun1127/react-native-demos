@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, ListView, Image, RefreshControl} from 'react-native';
 import Toast from 'react-native-toast'
-import LoadingView from "../common/LoadingView";
+import LoadingView from "../../common/LoadingView";
 import NewsDetail from './NewsDetail';
 const limitSize = 10;
 export default class extends Component {

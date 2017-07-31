@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-swiper';
 import Toast from 'react-native-toast';
 const {width} = Dimensions.get("window");
-import {request} from '../services/request';
+import {request} from '../../services/request';
 export default class extends Component {
     constructor(props) {
         super(props)
@@ -159,7 +159,7 @@ export default class extends Component {
         )
     }
 }
-import LoadingView from '../common/LoadingView';
+import LoadingView from '../../common/LoadingView';
 import ArtistsList from './ArtistsList';
 import MusicSearch from './MusicSearch';
 import Album from './Album';

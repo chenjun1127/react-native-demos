@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {View, Text, ListView} from 'react-native';
-import LoadingView from '../common/LoadingView';
+import LoadingView from '../../common/LoadingView';
 import Toast from 'react-native-toast'
 import ScrollableTabView, {DefaultTabBar, ScrollableTabBar} from 'react-native-scrollable-tab-view';
 export default class extends Component {

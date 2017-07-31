@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, TextInput,Image, TouchableHighlight,ListView,Keyboard,AsyncStorage} from 'react-native';
-import LoadingView from "../common/LoadingView";
+import LoadingView from "../../common/LoadingView";
 import Toast from 'react-native-toast'
 import MusicPlay from './MusicPlay'
 const data = ['歌手', '林俊杰', '张碧晨', '因为遇见你', 'KTV', '爱在记忆中找你', '薛之谦','张学友'];

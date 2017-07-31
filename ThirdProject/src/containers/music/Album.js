@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, ScrollView, ListView} from 'react-native';
-import NavigatorHeader from '../common/NavigatorHeader';
+import NavigatorHeader from '../../common/NavigatorHeader';
 import Toast from 'react-native-toast';
-import {request} from '../services/request';
-import LoadingView from '../common/LoadingView';
+import {request} from '../../services/request';
+import LoadingView from '../../common/LoadingView';
 export default class extends Component {
     constructor(props) {
         super(props)

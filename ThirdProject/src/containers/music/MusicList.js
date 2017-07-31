@@ -9,9 +9,7 @@ export default class extends Component {
         super(props)
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {}
-
         this.listNavigation = this.listNavigation.bind(this);
-
     }
 
     // 当前歌曲列表及音乐所在列表中的搜引
@@ -56,7 +54,7 @@ const styles = StyleSheet.create({
     listRow: {
         borderBottomColor: '#999',
         borderBottomWidth: StyleSheet.hairlineWidth,
-        paddingVertical: 10,
+        padding: 10,
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -73,6 +71,5 @@ const styles = StyleSheet.create({
         color: '#666',
         fontSize: 12,
         paddingTop: 5,
-    },
-
+    }
 })

@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {View, Text, StyleSheet,Animated,Easing,Image,TouchableOpacity,Dimensions,Slider} from 'react-native';
-import Control from './ControlPlayer'
+import Control from './MusicControl'
 import Video from 'react-native-video';
 import Icon from 'react-native-vector-icons/Ionicons';
 export default class  extends Component {
