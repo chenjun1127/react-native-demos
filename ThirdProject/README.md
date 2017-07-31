@@ -26,9 +26,26 @@
 * 京东万象天气API
 * 豆瓣电影API
 * 京东万象新闻API
+
 感谢以上API接口提供服务！
 
 ### 二、APP基本截图看[这里](https://github.com/chenjun1127/Movie-Site/blob/master/images.md)
 ### 三、运行环境及Node版本
 Windows 平台 + Android Studio + 真机（模拟器）+ Nodejs，当前node v6.9.2 运行正常；
 ### 四、安装及运行
+1、下载项目
+```bash
+git clone git@github.com:chenjun1127/React-Native-Demos.git
+```
+2、cd到目录
+```bash
+cd ThirdProject
+```
+3、安装依赖
+```bash
+npm install 
+```
+4、连上真机（模拟器）运行
+```bash
+react-native run-android
+```
