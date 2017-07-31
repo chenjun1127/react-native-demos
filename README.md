@@ -54,4 +54,4 @@ emulator @galaxy
 react-native run-android
 ```
 ### Tips
-附上常用的 React Native 第三方组件，[点击这里](https://github.com/kiss19861127/react-native-demos/blob/master/Third%20Party%20Components.md);
+附上常用的 React Native 第三方组件，[点击这里](https://github.com/kiss19861127/react-native-demos/blob/master/Third%20Party%20Components.md)。
