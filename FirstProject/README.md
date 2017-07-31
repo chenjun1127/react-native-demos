@@ -1,4 +1,4 @@
-# React-Native 基本API学习
+# React-Native 基本API及组件学习
  
 ### 安装及运行
 1、下载项目
