@@ -29,7 +29,7 @@
 
 感谢以上API接口提供服务！
 
-### 二、APP基本截图看[这里](https://github.com/chenjun1127/Movie-Site/blob/master/images.md)
+### 二、APP基本截图看[这里](https://github.com/chenjun1127/React-Native-Demos/blob/master/ThirdProject/images.md)
 ### 三、运行环境及Node版本
 Windows 平台 + Android Studio + 真机（模拟器）+ Nodejs，当前node v6.9.2 运行正常；
 ### 四、安装及运行
