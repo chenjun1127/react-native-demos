@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { StyleSheet ,Dimensions} from 'react-native';
-var {height, width} = Dimensions.get('window');
+const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,

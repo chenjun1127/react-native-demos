@@ -7,7 +7,7 @@
 import React, {Component} from 'react';
 import {AppRegistry} from 'react-native';
 
-import SecondProject from './js/IndexPage'
+import SecondProject from './src/Index';
 
 
 AppRegistry.registerComponent('SecondProject', () => SecondProject);

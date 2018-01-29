@@ -4,7 +4,13 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity,Navigator} from 'react-native';
-import styles from '../style/Styles'
+import styles from './style/Styles'
+
+import ImagePickerPage from './components/ImagePicker'
+import CarouselPage from './components/Carousel'
+import PullRefreshPage from './components/PullRefresh'
+import SwipeoutPage from './components/Swipeout'
+
 
 export default class SecondProject extends Component{
 
@@ -16,11 +22,9 @@ export default class SecondProject extends Component{
             {component:CarouselPage},
             {component:PullRefreshPage},
             {component:SwipeoutPage},
-
-
         ];
         return(
-            <Navigator initialRoute={routes[0]} initialRouteStack={routes} renderScene={(route,navigator) =>{
+            <Navigator initialRoute={routes[0]}  initialRouteStack={routes} renderScene={(route,navigator) =>{
                 return <route.component route={route} navigator={navigator} routes={routes} {...route.passProps}/>
             }} configureScene={this.configureScene} />
         )
@@ -62,8 +66,7 @@ class IndexComponent extends Component {
                 title: 'react-native-swipeout',
                 description: 'React Native 的 IOS 风格左滑删除组件',
                 componentName:'SwipeoutPage',
-            },
-
+            }
         ]
     }
     _navigate(name,component,type='normal') {
@@ -78,7 +81,6 @@ class IndexComponent extends Component {
 
     render() {
         const list = this.props.Data.map((ele, index) => {
-            console.log(ele,index)
             return <TextList key={index} title={ele.title} onclick={()=>{this._navigate(ele.title,this.props.routes[index+1].component)}}/>
         })
 
@@ -102,7 +104,4 @@ class TextList extends Component {
     }
 }
 
-import ImagePickerPage from './ImagePicker'
-import CarouselPage from './Carousel'
-import PullRefreshPage from './PullRefresh'
-import SwipeoutPage from './Swipeout'
+

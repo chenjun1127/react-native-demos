@@ -121,7 +121,7 @@ export default class PullRefreshPage extends Component {
     }
 
     loadMore() {
-        console.log(this.state.dataSource)
+        // console.log(this.state.dataSource)
 
     }
 
